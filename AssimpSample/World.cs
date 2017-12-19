@@ -46,15 +46,15 @@ namespace AssimpSample
                     /// </summary>
                     private float m_yRotation = 0.0f;
 
-                    /// <summary>
-                    ///	 Udaljenost scene od kamere.
-                    /// </summary>
-                    private float m_sceneDistance = 600.0f;
+        /// <summary>
+        ///	 Udaljenost scene od kamere.
+        /// </summary>
+        private float sceneDistance1 = 600.0f;
 
-                    /// <summary>
-                    ///	 Sirina OpenGL kontrole u pikselima.
-                    /// </summary>
-                    private int m_width;
+        /// <summary>
+        ///	 Sirina OpenGL kontrole u pikselima.
+        /// </summary>
+        private int m_width;
 
                     /// <summary>
                     ///	 Visina OpenGL kontrole u pikselima.
@@ -74,28 +74,29 @@ namespace AssimpSample
                     ///	 Putanje do slika koje se koriste za teksture
                     /// </summary>
                     private string[] m_textureFiles = { "..//..//images//grass.jpg", "..//..//images//plastika.jpg" , "..//..//images//lopta.jpg" };
-            #endregion
+        #endregion
         #region KretanjeLopte
-                    private float ballHeight;
-                    private bool ballGoingUp;
-                    private DispatcherTimer timer1;
-                    private DispatcherTimer timer2;
-                    public bool jumpStop;
-                    private float[] pos;
-        public double m_yRotateBall;
+        private float ballHeight;
+        private bool ballGoingUp;
+        private DispatcherTimer timer1;
+        private DispatcherTimer timer2;
+        private bool jumpStop;
+        private float[] pos;
+        private double yRotateBall;
         #endregion
         #region SvetloPozicija
-        public float xSvetlo;
-                    public float ySvetlo;
-                    public float zSvetlo;
-
-
+        private float xSvetlo;
+        private float ySvetlo;
+        private float zSvetlo;
+        private bool ukljucenoTackasto;
+        private bool ukljucenoReflektor;
+        private bool dnevnoSvetlo;
         #endregion
         #region SkaliranjeLopte
         public double velicinaLopte;
         #endregion
         #region AmbijentalnaKomponenta
-        public float[] ambijentalnaKomponenta2;
+        private float[] ambijentalnaKomponenta2;
         #endregion
         #endregion Atributi
 
@@ -133,8 +134,8 @@ namespace AssimpSample
         /// </summary>
         public float SceneDistance
         {
-            get { return m_sceneDistance; }
-            set { m_sceneDistance = value; }
+            get { return SceneDistance1; }
+            set { SceneDistance1 = value; }
         }
 
    
@@ -156,6 +157,22 @@ namespace AssimpSample
             get { return m_height; }
             set { m_height = value; }
         }
+
+        public DispatcherTimer Timer1 { get => timer1; set => timer1 = value; }
+        public DispatcherTimer Timer2 { get => timer2; set => timer2 = value; }
+        public float XSvetlo { get => xSvetlo; set => xSvetlo = value; }
+        public float YSvetlo { get => ySvetlo; set => ySvetlo = value; }
+        public float ZSvetlo { get => zSvetlo; set => zSvetlo = value; }
+        public bool UkljucenoTackasto { get => ukljucenoTackasto; set => ukljucenoTackasto = value; }
+        public bool UkljucenoReflektor { get => ukljucenoReflektor; set => ukljucenoReflektor = value; }
+        public bool DnevnoSvetlo { get => dnevnoSvetlo; set => dnevnoSvetlo = value; }
+        public float[] AmbijentalnaKomponenta2 { get => ambijentalnaKomponenta2; set => ambijentalnaKomponenta2 = value; }
+        public bool JumpStop { get => jumpStop; set => jumpStop = value; }
+        public float[] Pos { get => pos; set => pos = value; }
+        public double YRotateBall { get => yRotateBall; set => yRotateBall = value; }
+        public float BallHeight { get => ballHeight; set => ballHeight = value; }
+        public bool BallGoingUp { get => ballGoingUp; set => ballGoingUp = value; }
+        public float SceneDistance1 { get => sceneDistance1; set => sceneDistance1 = value; }
 
         #endregion Properties
 
@@ -183,7 +200,16 @@ namespace AssimpSample
 
         #region Metode
 
-       
+        public void TackastiIzvorOnOff()
+        {
+            UkljucenoTackasto = !UkljucenoTackasto;
+        }
+
+        public void ReflektorIzvorOnOff()
+        {
+            UkljucenoReflektor = !UkljucenoReflektor;
+        }
+
         /// <summary>
         ///  Korisnicka inicijalizacija i podesavanje OpenGL parametara.
         /// </summary>
@@ -231,40 +257,41 @@ namespace AssimpSample
                     image.UnlockBits(imageData);
                     image.Dispose();
                 }
-    #endregion
-          
+    #endregion          
             #region PomeranjeLopte
-            timer1 = new DispatcherTimer();
-                        timer1.Interval = TimeSpan.FromMilliseconds(10);
-                        timer1.Tick += new EventHandler(UpdateAnimation1);
-                        timer1.Start();
-                        timer2 = new DispatcherTimer();
-                        pos = new float[3];
-                        pos[0] = 0f;
-                        pos[1] = ballHeight;
-                        pos[2] = -m_sceneDistance + 200;
-                        ballHeight = -100f;
-                        ballGoingUp = true;
-                        jumpStop = false;
-                        m_yRotateBall = 0;
+            Timer1 = new DispatcherTimer();
+                        Timer1.Interval = TimeSpan.FromMilliseconds(10);
+                        Timer1.Tick += new EventHandler(UpdateAnimation1);
+                        Timer1.Start();
+                        Timer2 = new DispatcherTimer();
+                        Pos = new float[3];
+                        BallHeight = -100f;
+                        Pos[0] = 0f;
+                        Pos[1] = BallHeight;
+                        Pos[2] = -SceneDistance1 + 200;
+                        
+                        BallGoingUp = true;
+                        JumpStop = false;
+                        YRotateBall = 0;
                        
             #endregion
             #region SvetloPozicija
-            xSvetlo = 0;
-                ySvetlo = 100;
-                zSvetlo = -400;
-
-
+                XSvetlo = 0;
+                YSvetlo = 100;
+                ZSvetlo = -SceneDistance1 + 250;
+                UkljucenoTackasto = true;
+                UkljucenoReflektor = true;
+            DnevnoSvetlo = false;
             #endregion
             #region SkaliranjeLopte
             velicinaLopte = MainWindow.skaliranje;
             #endregion
             #region AmbijentalnaKomponenta
-                ambijentalnaKomponenta2 = new float[4];
-                ambijentalnaKomponenta2[0] = 0.3f;
-                ambijentalnaKomponenta2[1] = 0.3f;
-                ambijentalnaKomponenta2[2] = 0.9f;
-                ambijentalnaKomponenta2[3] = 1f;
+                AmbijentalnaKomponenta2 = new float[4];
+                AmbijentalnaKomponenta2[0] = 0.3f;
+                AmbijentalnaKomponenta2[1] = 0.3f;
+                AmbijentalnaKomponenta2[2] = 0.9f;
+                AmbijentalnaKomponenta2[3] = 1f;
             #endregion
             m_scene.LoadScene();
             m_scene.Initialize();
@@ -275,17 +302,17 @@ namespace AssimpSample
         public void sutniLoptu()
         {
             //RADI NA DUGME V
-            ballHeight = -100f;
-            pos[0] = 0f;
-            pos[1] = ballHeight;
-            pos[2] = -m_sceneDistance + 200;
-            jumpStop = true;
+            BallHeight = -100f;
+            Pos[0] = 0f;
+            Pos[1] = BallHeight;
+            Pos[2] = -SceneDistance1 + 200;
+            JumpStop = true;
 
-            timer1.Stop();
-            timer2 = new DispatcherTimer();
-            timer2.Interval = TimeSpan.FromMilliseconds(1);
-            timer2.Tick += new EventHandler(UpdateAnimation2);
-            timer2.Start();
+            Timer1.Stop();
+            Timer2 = new DispatcherTimer();
+            Timer2.Interval = TimeSpan.FromMilliseconds(1);
+            Timer2.Tick += new EventHandler(UpdateAnimation2);
+            Timer2.Start();
 
         }
 
@@ -293,51 +320,26 @@ namespace AssimpSample
                 {
 
                    
-                    if (m_yRotateBall > 360)
-                    {
-                        m_yRotateBall = 0.0f;
-                    }
-                    else
-                    {
-                        m_yRotateBall += MainWindow.brzinaRotacije;
-                    }
-                    if (ballGoingUp)
-                        {
-                            ballHeight += 10f;
-                            pos[0] = 0;
-                            pos[1] = ballHeight;
-                            if (ballHeight == 0f)
-                                ballGoingUp = false;
-                        }
 
-                    else
-                        {
-                            ballHeight -= 10f;
-                            pos[0] = 0;
-                            pos[1] = ballHeight;
-                            if (ballHeight == -100f)
-                                ballGoingUp = true;
-                        }
-            
            
                
                 }
 
                 private void UpdateAnimation2(object sender, EventArgs e)
                 {
-                    m_yRotateBall = 0;
-                    if (pos[2] < 100)
+                    YRotateBall = 0;
+                    if (Pos[2] < 100)
                     {
-                        pos[0] += 4;
-                        pos[1] += 5;
-                        pos[2] += 10;
+                        Pos[0] += 4;
+                        Pos[1] += 5;
+                        Pos[2] += 10;
                     }
                     else
                     {
-                        ballHeight = -100f;
-                        pos[0] = 0f;
-                        pos[1] = ballHeight;
-                        pos[2] = -m_sceneDistance + 200;
+                        BallHeight = -100f;
+                        Pos[0] = 0f;
+                        Pos[1] = BallHeight;
+                        Pos[2] = -SceneDistance1 + 200;
 
 
                     }
@@ -359,64 +361,122 @@ namespace AssimpSample
 
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
             gl.PushMatrix();
+            gl.Rotate(m_xRotation, 1, 0, 0);
+            gl.Rotate(m_yRotation, 0, 1, 0);
+            gl.PushMatrix();
+           
             //KAMERA
-                Glu.gluLookAt(0f, 0f, -m_sceneDistance - 400, 0f, 0f, -m_sceneDistance, 0f, 1f, 0f);
+            Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
                 gl.PushMatrix();
                     gl.Viewport(0, 0, m_width, m_height);
-                    Glu.gluLookAt(0f, 0f, -m_sceneDistance - 400, 0f, 0f, -m_sceneDistance, 0f, 1f, 0f);
-#endregion
+                    Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
+            #endregion
+
             //DRUGA TACKA
-    #region Osvetljenje
+
+            #region Osvetljenje
+            gl.Enable(OpenGL.GL_LIGHTING);
+
+            gl.PushMatrix();
             #region TackastiIzvorSvetlosti
-            float[] ambijentalnaKomponenta = { 0.5f, 0.5f, 0.5f, 1.0f };
-                    float[] difuznaKomponenta = { 0.5f, 0.5f, 0.5f, 1.0f };
-                    // Pridruži komponente svetlosnom izvoru 0
-                    gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT,
-                     ambijentalnaKomponenta);
-                    gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE,
-                    difuznaKomponenta);
-                    // Podesi parametre tackastog svetlosnog izvora
+                    float[] ambijentalnaKomponenta = { 0.7f, 0.2f, 0.3f, 1.0f };
+                    float[] spekularnaKomponenta = { 0.5f, 0.5f, 0.5f, 1 };
+                    float[] difuznaKomponenta = { 0.7f, 0.2f, 0.3f, 1.0f };
+ 
+                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT, ambijentalnaKomponenta);
+                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE, difuznaKomponenta);
+                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPECULAR, spekularnaKomponenta);
+
+                    float[] smer1 = { -1f, 0.0f, -1.0f };
+                    gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_DIRECTION, smer1);
+
                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_CUTOFF, 180.0f);
                     // Pozicioniraj svetlosni izvor
-                    float[] pozicija = { 400f, 200.0f, -m_sceneDistance - 400, 1.0f };
-                    Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pozicija);
-                #endregion
-
-     #region Reflektor
-                     gl.PushMatrix();
-              
-                        float[] difuznaKomponenta2 = { 0.5f, 0.5f, 0.7f, 1.0f };
-                        float[] smer = { 0.0f, 0.0f, -1.0f };
-                        float[] light0specular = new float[] { 0.5f, 0.5f, 0.7f, 1.0f };
+           
+                    float[] pozicija = { 600f, 600.0f, -SceneDistance1 + 200, 1.0f };
+                            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pozicija);
 
             
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPECULAR, light0specular);
-                        // Pridruži komponente svetlosnom izvoru 1
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_AMBIENT,
-                         ambijentalnaKomponenta2);
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_DIFFUSE,
-                        difuznaKomponenta2);
-                        // Podesi parametre reflektorkskog izvora
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_DIRECTION, smer);
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_CUTOFF, 35.0f);
-                        // Ukljuci svetlosni izvor
+                    gl.PopMatrix();
+                        #endregion
+
+            #region Reflektor
+                             gl.PushMatrix();
+              
+                                float[] difuznaKomponenta2 = { 0.7f, 0.8f, 0.9f, 1.0f };
+                                float[] smer = { 0.0f, 0.0f, -1.0f };
+                                float[] light0specular = new float[] { 0.5f, 0.6f, 0.8f, 1.0f };
+
+            
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPECULAR, light0specular);
+                                // Pridruži komponente svetlosnom izvoru 1
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_AMBIENT,
+                                 AmbijentalnaKomponenta2);
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_DIFFUSE,
+                                difuznaKomponenta2);
+                                // Podesi parametre reflektorkskog izvora
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_DIRECTION, smer);
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_CUTOFF, 35.0f);
+                                // Ukljuci svetlosni izvor
            
-                        gl.Rotate(-45, 1, 0, 0);
+                                gl.Rotate(-45, 1, 0, 0);
          
-                        // Pozicioniraj svetlosni izvor
-                        float[] pozicija2 = { xSvetlo, ySvetlo, zSvetlo, 1.0f };
-                        gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_POSITION, pozicija2);
+                                // Pozicioniraj svetlosni izvor
+                                float[] pozicija2 = { XSvetlo, YSvetlo, ZSvetlo, 1.0f };
+                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_POSITION, pozicija2);
+
+                     gl.PopMatrix();
+
+                    #region DnevnoSvetlo
+                    gl.PushMatrix();
+
+                        float[] difuznaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
+                        float[] smer3 = { 0.0f, 0.0f, -1.0f };
+                        float[] light0specular3 = new float[] { 0.5f,0.5f,0.5f,1};
+                        float[] ambijentalnaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
+
+                    gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPECULAR, light0specular3);
+                        // Pridruži komponente svetlosnom izvoru 1
+                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_AMBIENT,
+                         ambijentalnaKomponenta3);
+                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_DIFFUSE,
+                        difuznaKomponenta3);
+                        // Podesi parametre reflektorkskog izvora
+                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_DIRECTION, smer3);
+                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_CUTOFF, 180);
+                        // Ukljuci svetlosni izvor
+
+                        gl.Rotate(45, 1, 0, 0);
+           
+                        float[] pozicija3 = { 0, 600, -SceneDistance1-300, 1.0f };
+                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_POSITION, pozicija3);
+
                     gl.PopMatrix();
 
+                    #endregion
 
-                #endregion
-         gl.Enable(OpenGL.GL_LIGHTING);
-         gl.Enable(OpenGL.GL_LIGHT0);
-         gl.Enable(OpenGL.GL_LIGHT1);
 
-#endregion
+                    if (UkljucenoTackasto)
+                        gl.Enable(OpenGL.GL_LIGHT0);
+                    else
+                        gl.Disable(OpenGL.GL_LIGHT0);
 
-    #region Podloga
+                    if (UkljucenoReflektor)
+                        gl.Enable(OpenGL.GL_LIGHT1);
+                    else
+                        gl.Disable(OpenGL.GL_LIGHT1);
+
+                    if (DnevnoSvetlo)
+                        gl.Enable(OpenGL.GL_LIGHT2);
+                    else
+                        gl.Disable(OpenGL.GL_LIGHT2);
+                    #endregion
+
+
+
+            #endregion
+
+            #region Podloga
             //PODLOGA
             gl.PushMatrix();
                         gl.Translate(0.0f, -0f, -0);
@@ -431,13 +491,13 @@ namespace AssimpSample
 
                 gl.Begin(OpenGL.GL_QUADS);
                             gl.TexCoord(0.0f, 0.0f);
-                            gl.Vertex4f(400f, -100f, m_sceneDistance, 1);
+                            gl.Vertex4f(400f, -100f, SceneDistance1, 1);
                             gl.TexCoord(1.0f, 0.0f);
-                            gl.Vertex4f(400f, -100f, -m_sceneDistance-400, 1);
+                            gl.Vertex4f(400f, -100f, -SceneDistance1-400, 1);
                             gl.TexCoord(1.0f, 1.0f);
-                            gl.Vertex4f(-400f, -100f, -m_sceneDistance-400, 1);
+                            gl.Vertex4f(-400f, -100f, -SceneDistance1-400, 1);
                             gl.TexCoord(0.0f, 1.0f);
-                            gl.Vertex4f(-400f, -100f, m_sceneDistance, 1);
+                            gl.Vertex4f(-400f, -100f, SceneDistance1, 1);
                         gl.End();
             
                     gl.PopMatrix();
@@ -454,7 +514,7 @@ namespace AssimpSample
             gl.TexEnv(OpenGL.GL_TEXTURE_ENV, OpenGL.GL_TEXTURE_ENV_MODE, OpenGL.GL_ADD);
 
 
-                        gl.Translate(-150, 105.0f, -m_sceneDistance - 100);
+                        gl.Translate(-150, 105.0f, -SceneDistance1 - 100);
                         gl.Rotate(90f, 90f, 0f);
 
 
@@ -475,7 +535,7 @@ namespace AssimpSample
                 //LEVA STATIVA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -100.0f, -m_sceneDistance-100);
+                        gl.Translate(-150f, -100.0f, -SceneDistance1-100);
                         gl.Rotate(-90f, 0f, 0f);
      
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder2 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder2" };
@@ -491,7 +551,7 @@ namespace AssimpSample
                 //DESNA STATIVA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                         gl.Translate(150f, -100.0f, -m_sceneDistance - 100);
+                         gl.Translate(150f, -100.0f, -SceneDistance1 - 100);
                          gl.Rotate(-90f, 0f, 0f);
            
                          SharpGL.SceneGraph.Quadrics.Cylinder cylinder3 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder3" };
@@ -507,7 +567,7 @@ namespace AssimpSample
                 //DESNA STATIVA IZA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(150f, -100.0f, -m_sceneDistance - 300);
+                        gl.Translate(150f, -100.0f, -SceneDistance1 - 300);
                         gl.Rotate(-45f, 0f, 0f);
      
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder4 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder4" };
@@ -523,7 +583,7 @@ namespace AssimpSample
                 //LEVA STATIVA IZA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -100.0f, -m_sceneDistance - 300);
+                        gl.Translate(-150f, -100.0f, -SceneDistance1 - 300);
                         gl.Rotate(-45f, 0f, 0f);
           
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder5 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder5" };
@@ -539,7 +599,7 @@ namespace AssimpSample
                 //DOLE
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150, -95f, -m_sceneDistance - 290);
+                        gl.Translate(-150, -95f, -SceneDistance1 - 290);
                         gl.Rotate(90f, 90f, 0f);
 
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder6 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder6" };
@@ -555,7 +615,7 @@ namespace AssimpSample
                 //DONJA DESNA STRANA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(150f, -95.0f, -m_sceneDistance - 290);
+                        gl.Translate(150f, -95.0f, -SceneDistance1 - 290);
                         gl.Rotate(180f, 180f, 0f);
 
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder7 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder7" };
@@ -571,7 +631,7 @@ namespace AssimpSample
                 //DONJA LEVA STRANA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -95.0f, -m_sceneDistance - 290);
+                        gl.Translate(-150f, -95.0f, -SceneDistance1 - 290);
                         gl.Rotate(180f, 180f, 0f);
            
             SharpGL.SceneGraph.Quadrics.Cylinder cylinder8 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder8" };
@@ -584,27 +644,70 @@ namespace AssimpSample
 
                     gl.PopMatrix();
 
-    #endregion
-            
+            #endregion
+
     #region Lopta
-                gl.PushMatrix();
-                gl.LoadIdentity();
-                Glu.gluLookAt(0f, 0f, -m_sceneDistance - 400, 0f, 0f, -m_sceneDistance, 0f, 1f, 0f);
+            
+            gl.PushMatrix();
+
+
+                Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Ball]);
                 gl.TexEnv(OpenGL.GL_TEXTURE_ENV, OpenGL.GL_TEXTURE_ENV_MODE, OpenGL.GL_MODULATE);
 
-                gl.Translate(pos[0], pos[1], pos[2]);
+            if (!JumpStop)
+            {
+                if (BallGoingUp)
+                {
+                    BallHeight += 40f;
+                    Pos[0] = 0;
+                    Pos[1] = BallHeight;
+                    if (BallHeight >= -30f)
+                        BallGoingUp = false;
+                }
+
+                else
+                {
+                    BallHeight -= 40f;
+                    Pos[0] = 0;
+                    Pos[1] = BallHeight;
+                    if (BallHeight == -100f)
+                        BallGoingUp = true;
+                }
+
+                 gl.Translate(Pos[0], Pos[1], Pos[2]);
+
+
+                if (YRotateBall > 45)
+                {
+                    YRotateBall = 0.0f;
+                }
+                else
+                {
+                    YRotateBall += MainWindow.brzinaRotacije;
+                }
+
+            gl.Rotate(YRotateBall, 0, 1, 0);
+            }
+            else
+            {
+                gl.Translate(Pos[0], Pos[1], Pos[2]);
+            }
+
+            
+
+
            
-                gl.Rotate(m_yRotateBall, 0, 1, 0);
-              
+
                 gl.Scale(velicinaLopte, velicinaLopte, velicinaLopte);
                 m_scene.Draw();
- 
+                
 
                gl.PopMatrix();
     #endregion
                 gl.PopMatrix();
             gl.PopMatrix();
+            gl.PopMatrix(); 
 #region Tekst
             gl.PushMatrix();
                 gl.LoadIdentity();

@@ -164,42 +164,43 @@ namespace AssimpSample
 
                 case Key.F4: this.Close(); break;
                 case Key.D:
-                    if(!m_world.jumpStop)
-                        m_world.RotationX -= 5.0f;
-                    break;
-                case Key.E: if (!m_world.jumpStop)
+                    if(!m_world.JumpStop)
                         m_world.RotationX += 5.0f;
                     break;
+                case Key.E:
+                    if (!m_world.JumpStop)
+                        m_world.RotationX -= 5.0f;
+                    break;
                 case Key.S:
-                    if (!m_world.jumpStop)
+                    if (!m_world.JumpStop)
                         m_world.RotationY -= 5.0f;
                     break;
                 case Key.F:
-                    if (!m_world.jumpStop)
+                    if (!m_world.JumpStop)
                         m_world.RotationY += 5.0f;
                     break;
                 case Key.Add:
-                    if (!m_world.jumpStop)
-                        if (!m_world.jumpStop) m_world.SceneDistance -= 50;
+                    if (!m_world.JumpStop)
+                        if (!m_world.JumpStop) m_world.SceneDistance -= 50;
                     break;
                 case Key.Subtract:
-                    if (!m_world.jumpStop)
+                    if (!m_world.JumpStop)
                         m_world.SceneDistance += 50;
                     break;
-                case Key.V: if (!m_world.jumpStop)
+                case Key.V: if (!m_world.JumpStop)
                         m_world.sutniLoptu();
                     break;
                 case Key.X:
-                    if (!m_world.jumpStop)
-                        m_world.xSvetlo += 10;
+                    if (!m_world.JumpStop)
+                        m_world.XSvetlo += 10;
                     break;
                 case Key.Y:
-                    if (!m_world.jumpStop)
-                        m_world.ySvetlo += 10;
+                    if (!m_world.JumpStop)
+                        m_world.YSvetlo += 10;
                     break;
                 case Key.Z:
-                    if (!m_world.jumpStop)
-                        m_world.zSvetlo += 10;
+                    if (!m_world.JumpStop)
+                        m_world.ZSvetlo -= 50;
                     break;
             }
         }
@@ -347,46 +348,103 @@ namespace AssimpSample
         {
             if (ambijentCombo.SelectedIndex.Equals(-1))
             {
-                m_world.ambijentalnaKomponenta2 = new float[4];
-                m_world.ambijentalnaKomponenta2[0] = 0.3f;
-                m_world.ambijentalnaKomponenta2[1] = 0.3f;
-                m_world.ambijentalnaKomponenta2[2] = 0.9f;
-                m_world.ambijentalnaKomponenta2[3] = 1f;
+                m_world.AmbijentalnaKomponenta2 = new float[4];
+                m_world.AmbijentalnaKomponenta2[0] = 0.3f;
+                m_world.AmbijentalnaKomponenta2[1] = 0.3f;
+                m_world.AmbijentalnaKomponenta2[2] = 0.9f;
+                m_world.AmbijentalnaKomponenta2[3] = 1f;
             }
                
 
             else if (ambijentCombo.SelectedItem.Equals("Plava"))
             {
-                m_world.ambijentalnaKomponenta2 = new float[4];
-                m_world.ambijentalnaKomponenta2[0] = 0.3f;
-                m_world.ambijentalnaKomponenta2[1] = 0.3f;
-                m_world.ambijentalnaKomponenta2[2] = 0.9f;
-                m_world.ambijentalnaKomponenta2[3] = 1f;
+                m_world.AmbijentalnaKomponenta2 = new float[4];
+                m_world.AmbijentalnaKomponenta2[0] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[1] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[2] = 0.5f;
+                m_world.AmbijentalnaKomponenta2[3] = 1f;
             }
             else if (ambijentCombo.SelectedItem.Equals("Crvena"))
             {
-                m_world.ambijentalnaKomponenta2 = new float[4];
-                m_world.ambijentalnaKomponenta2[0] = 0.9f;
-                m_world.ambijentalnaKomponenta2[1] = 0.3f;
-                m_world.ambijentalnaKomponenta2[2] = 0.3f;
-                m_world.ambijentalnaKomponenta2[3] = 1f;
+                m_world.AmbijentalnaKomponenta2 = new float[4];
+                m_world.AmbijentalnaKomponenta2[0] = 0.5f;
+                m_world.AmbijentalnaKomponenta2[1] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[2] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[3] = 1f;
             }
             else if (ambijentCombo.SelectedItem.Equals("Zelena"))
             {
-                m_world.ambijentalnaKomponenta2 = new float[4];
-                m_world.ambijentalnaKomponenta2[0] = 0.3f;
-                m_world.ambijentalnaKomponenta2[1] = 0.9f;
-                m_world.ambijentalnaKomponenta2[2] = 0.3f;
-                m_world.ambijentalnaKomponenta2[3] = 1f;
+                m_world.AmbijentalnaKomponenta2 = new float[4];
+                m_world.AmbijentalnaKomponenta2[0] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[1] = 0.5f;
+                m_world.AmbijentalnaKomponenta2[2] = 0.1f;
+                m_world.AmbijentalnaKomponenta2[3] = 1f;
             }
             else if (ambijentCombo.SelectedItem.Equals("Bela"))
             {
-                m_world.ambijentalnaKomponenta2 = new float[4];
-                m_world.ambijentalnaKomponenta2[0] = 0.9f;
-                m_world.ambijentalnaKomponenta2[1] = 0.9f;
-                m_world.ambijentalnaKomponenta2[2] = 0.9f;
-                m_world.ambijentalnaKomponenta2[3] = 1f;
+                m_world.AmbijentalnaKomponenta2 = new float[4];
+                m_world.AmbijentalnaKomponenta2[0] = 0.9f;
+                m_world.AmbijentalnaKomponenta2[1] = 0.9f;
+                m_world.AmbijentalnaKomponenta2[2] = 0.9f;
+                m_world.AmbijentalnaKomponenta2[3] = 1f;
             }
+        }
+
+        private void tackastiIzvor_Checked(object sender, RoutedEventArgs e)
+        {
+            bool ch;
+            if (ch = tackastiIzvor.IsChecked == true ? true : false)
+            {
+               m_world.UkljucenoTackasto = true;
+            }
+            else
+            {
+                m_world.UkljucenoTackasto = false;
+            }
+        }
+
+        private void reflektorskiIzvor_Checked(object sender, RoutedEventArgs e)
+        {
+            bool ch;
+            if (ch = reflektorskiIzvor.IsChecked == true ? true : false)
+            {
+                m_world.UkljucenoReflektor = true;
+            }
+            else
+            {
+                m_world.UkljucenoReflektor = false;
+            }
+        }
+
+        private void dnevnoSvetlo_Checked(object sender, RoutedEventArgs e)
+        {
+            bool ch;
+            if (ch = dnevnoSvetlo.IsChecked == true ? true : false)
+            {
+                m_world.DnevnoSvetlo = true;
+            }
+            else
+            {
+                m_world.DnevnoSvetlo = false;
+            }
+        }
+
+        private void sutni_Click(object sender, RoutedEventArgs e)
+        {
+            m_world.sutniLoptu();
+        }
+
+        private void pocetak_Click(object sender, RoutedEventArgs e)
+        {
+            m_world.Timer2.Stop();
+            m_world.BallHeight = -100f;
+            m_world.Pos[0] = 0f;
+            m_world.Pos[1] = m_world.BallHeight;
+            m_world.Pos[2] = -m_world.SceneDistance1 + 200;
+
+            m_world.BallGoingUp = true;
+            m_world.JumpStop = false;
+            m_world.YRotateBall = 0;
         }
     }
 }
