@@ -24,9 +24,9 @@
         <CheckBox Name="reflektorskiIzvor" Margin="0,95,15.8,0" VerticalAlignment="Top" Click="reflektorskiIzvor_Checked" IsChecked="True" Cursor="Hand" Focusable="False" HorizontalAlignment="Right" Width="16"/>
         <Label Content="Dnevno svetlo:" Margin="0,116,31.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="131"/>
         <CheckBox Name="dnevnoSvetlo" Margin="0,121,15.8,0" VerticalAlignment="Top" Click="dnevnoSvetlo_Checked" IsChecked="False" Cursor="Hand" Focusable="False" HorizontalAlignment="Right" Width="16" />
-        <Label Content="Kretanje lopte:" Margin="0,162,9.8,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="153"/>
-        <Button Name="sutni" Content="Šutni" Margin="0,201,87.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="sutni_Click"/>
-        <Button Name="pocetak" Content="Na početak" Margin="0,201,7.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="pocetak_Click"/>
+        <Label Content="Kretanje lopte:" Margin="0,173,9.8,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Right" Width="153"/>
+        <Button Name="sutni" Content="Šutni" Margin="0,215,87.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="sutni_Click"/>
+        <Button Name="pocetak" Content="Na početak" Margin="0,215,7.8,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="pocetak_Click"/>
         <Label Content="Dodatno:" HorizontalContentAlignment="Center" FontStyle="Italic" Margin="0,3,-0.2,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="168"/>
         <Label Content="Kontrole:" FontWeight="Bold" Margin="0,265,7.8,0" HorizontalAlignment="Right" Width="155" Height="27" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,297,9.8,0" TextAlignment="Center" TextWrapping="Wrap" Width="153" Height="173" VerticalAlignment="Top">
