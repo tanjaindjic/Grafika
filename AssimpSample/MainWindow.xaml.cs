@@ -164,11 +164,11 @@ namespace AssimpSample
 
                 case Key.F4: this.Close(); break;
                 case Key.D:
-                    if(!m_world.JumpStop)
+                    if(!m_world.JumpStop && m_world.RotationX<5)
                         m_world.RotationX += 5.0f;
                     break;
                 case Key.E:
-                    if (!m_world.JumpStop)
+                    if (!m_world.JumpStop && m_world.RotationX > -70)
                         m_world.RotationX -= 5.0f;
                     break;
                 case Key.S:
@@ -440,7 +440,7 @@ namespace AssimpSample
             m_world.BallHeight = -100f;
             m_world.Pos[0] = 0f;
             m_world.Pos[1] = m_world.BallHeight;
-            m_world.Pos[2] = -m_world.SceneDistance1 + 200;
+            m_world.Pos[2] = -200;
 
             m_world.BallGoingUp = true;
             m_world.JumpStop = false;

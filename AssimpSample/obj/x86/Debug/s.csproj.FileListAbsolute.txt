@@ -69,3 +69,77 @@ C:\Users\hrcak\Source\Repos\Grafika\AssimpSample\obj\x86\Debug\AssimpSample.Prop
 C:\Users\hrcak\Source\Repos\Grafika\AssimpSample\obj\x86\Debug\s.csproj.GenerateResource.Cache
 C:\Users\hrcak\Source\Repos\Grafika\AssimpSample\obj\x86\Debug\AssimpSample.exe
 C:\Users\hrcak\Source\Repos\Grafika\AssimpSample\obj\x86\Debug\AssimpSample.pdb
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp32.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp64.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\AssimpNet.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.3DS
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.gsm
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\PRITESH KADAM.max
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe.config
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.pdb
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpNet.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.WPF.dll
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\s.csprojResolveAssemblyReference.cache
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.baml
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.g.cs
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\App.g.cs
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_Content.g.cs
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_MarkupCompile.cache
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.g.resources
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.Properties.Resources.resources
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\s.csproj.GenerateResource.Cache
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\s.csproj.CoreCompileInputs.cache
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.exe
+C:\Users\ra145-2014\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.pdb
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp32.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp64.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpLib\AssimpNet.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.3DS
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.gsm
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\PRITESH KADAM.max
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe.config
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpSample.pdb
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\AssimpNet.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\SharpGL.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\bin\Debug\SharpGL.WPF.dll
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\s.csprojResolveAssemblyReference.cache
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.baml
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.g.cs
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\App.g.cs
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_Content.g.cs
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_MarkupCompile.cache
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.g.resources
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.Properties.Resources.resources
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\s.csproj.GenerateResource.Cache
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\s.csproj.CoreCompileInputs.cache
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.exe
+C:\Users\ra145-2014\Desktop\svds\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.pdb
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp32.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\Assimp64.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpLib\AssimpNet.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.3DS
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\Ball N130816.gsm
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\3D Models\Ball\PRITESH KADAM.max
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe.config
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.exe
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpSample.pdb
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\AssimpNet.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\bin\Debug\SharpGL.WPF.dll
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\s.csprojResolveAssemblyReference.cache
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.baml
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\MainWindow.g.cs
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\App.g.cs
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_Content.g.cs
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample_MarkupCompile.cache
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.g.resources
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.Properties.Resources.resources
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\s.csproj.GenerateResource.Cache
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.exe
+C:\Users\hrcak\Desktop\Grafika-master\AssimpSample\obj\x86\Debug\AssimpSample.pdb

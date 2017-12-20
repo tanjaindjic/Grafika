@@ -49,7 +49,7 @@ namespace AssimpSample
         /// <summary>
         ///	 Udaljenost scene od kamere.
         /// </summary>
-        private float sceneDistance1 = 600.0f;
+        private float sceneDistance1 = 200.0f;
 
         /// <summary>
         ///	 Sirina OpenGL kontrole u pikselima.
@@ -268,17 +268,15 @@ namespace AssimpSample
                         BallHeight = -100f;
                         Pos[0] = 0f;
                         Pos[1] = BallHeight;
-                        Pos[2] = -SceneDistance1 + 200;
+                        Pos[2] = -200;
                         
                         BallGoingUp = true;
                         JumpStop = false;
                         YRotateBall = 0;
                        
             #endregion
-            #region SvetloPozicija
-                XSvetlo = 0;
-                YSvetlo = 100;
-                ZSvetlo = -SceneDistance1 + 250;
+            #region Osvetljenje
+                
                 UkljucenoTackasto = true;
                 UkljucenoReflektor = true;
             DnevnoSvetlo = false;
@@ -305,7 +303,7 @@ namespace AssimpSample
             BallHeight = -100f;
             Pos[0] = 0f;
             Pos[1] = BallHeight;
-            Pos[2] = -SceneDistance1 + 200;
+            Pos[2] = -200;
             JumpStop = true;
 
             Timer1.Stop();
@@ -328,10 +326,10 @@ namespace AssimpSample
                 private void UpdateAnimation2(object sender, EventArgs e)
                 {
                     YRotateBall = 0;
-                    if (Pos[2] < 100)
+                    if (Pos[2] <= 300)
                     {
-                        Pos[0] += 4;
-                        Pos[1] += 5;
+                        Pos[0] += 6;
+                        Pos[1] += 8;
                         Pos[2] += 10;
                     }
                     else
@@ -339,7 +337,7 @@ namespace AssimpSample
                         BallHeight = -100f;
                         Pos[0] = 0f;
                         Pos[1] = BallHeight;
-                        Pos[2] = -SceneDistance1 + 200;
+                        Pos[2] = -200;
 
 
                     }
@@ -358,122 +356,127 @@ namespace AssimpSample
             gl.MatrixMode(OpenGL.GL_PROJECTION);
             gl.LoadIdentity();
             Glu.gluPerspective(50.0, (double)m_width / (double)m_height, 0.5, 1000.0);
-
+            Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
+
+            //DRUGA TACKA
+            gl.PushMatrix();
+            #region Osvetljenje
+            gl.Enable(OpenGL.GL_LIGHTING);
+
+            gl.PushMatrix();
+
+            #region TackastiIzvorSvetlosti
+            float[] ambijentalnaKomponenta = { 0.9f, 0.3f, 0.4f, 1.0f };
+            float[] spekularnaKomponenta = { 0.5f, 0.5f, 0.5f, 1 };
+            float[] difuznaKomponenta = { 0.9f, 0.3f, 0.4f, 1.0f };
+
+            gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT, ambijentalnaKomponenta);
+            gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE, difuznaKomponenta);
+            gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPECULAR, spekularnaKomponenta);
+
+            float[] smer1 = { 0f, 0f, -1f };
+            gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_DIRECTION, smer1);
+
+            gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_CUTOFF, 180.0f);
+            // Pozicioniraj svetlosni izvor
+            //gl.Rotate(-90, 1, 0, 0);
+           // gl.Rotate(-90, 0, 1, 0);
+            float[] pozicija = { -300f, 200.0f, -200, 1.0f };
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pozicija);
+
+
+            gl.PopMatrix();
+            #endregion
+
+            #region Reflektor
+            gl.PushMatrix();
+
+            float[] difuznaKomponenta2 = { 0.7f, 0.8f, 0.9f, 1.0f };
+            float[] smer = { 0.0f, 0.0f, -1.0f };
+            float[] light0specular = new float[] { 0.5f, 0.6f, 0.8f, 1.0f };
+
+
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPECULAR, light0specular);
+            // Pridruži komponente svetlosnom izvoru 1
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_AMBIENT,
+             AmbijentalnaKomponenta2);
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_DIFFUSE,
+            difuznaKomponenta2);
+            // Podesi parametre reflektorkskog izvora
+           
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_CUTOFF, 35.0f);
+            // Ukljuci svetlosni izvor
+
+            gl.Rotate(-45, 1, 0, 0);
+
+            // Pozicioniraj svetlosni izvor
+           
+
+            gl.PopMatrix();
+
+            #region DnevnoSvetlo
+            gl.PushMatrix();
+
+            float[] difuznaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
+            float[] smer3 = { 0.0f, 0.0f, -1.0f };
+            float[] light0specular3 = new float[] { 0.5f, 0.5f, 0.5f, 1 };
+            float[] ambijentalnaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
+
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPECULAR, light0specular3);
+            // Pridruži komponente svetlosnom izvoru 1
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_AMBIENT,
+             ambijentalnaKomponenta3);
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_DIFFUSE,
+            difuznaKomponenta3);
+            // Podesi parametre reflektorkskog izvora
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_DIRECTION, smer3);
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_CUTOFF, 180);
+            // Ukljuci svetlosni izvor
+
+            gl.Rotate(45, 1, 0, 0);
+
+            float[] pozicija3 = { 0, 600, -SceneDistance1 - 300, 1.0f };
+            gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_POSITION, pozicija3);
+
+            gl.PopMatrix();
+
+            #endregion
+
+
+            if (UkljucenoTackasto)
+                gl.Enable(OpenGL.GL_LIGHT0);
+            else
+                gl.Disable(OpenGL.GL_LIGHT0);
+
+            if (UkljucenoReflektor)
+                gl.Enable(OpenGL.GL_LIGHT1);
+            else
+                gl.Disable(OpenGL.GL_LIGHT1);
+
+            if (DnevnoSvetlo)
+                gl.Enable(OpenGL.GL_LIGHT2);
+            else
+                gl.Disable(OpenGL.GL_LIGHT2);
+
+            gl.PopMatrix();
+            #endregion
+
+
+
+            #endregion
+
+
             gl.PushMatrix();
             gl.Rotate(m_xRotation, 1, 0, 0);
             gl.Rotate(m_yRotation, 0, 1, 0);
             gl.PushMatrix();
            
             //KAMERA
-            Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
-                gl.PushMatrix();
-                    gl.Viewport(0, 0, m_width, m_height);
-                    Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
-            #endregion
-
-            //DRUGA TACKA
-
-            #region Osvetljenje
-            gl.Enable(OpenGL.GL_LIGHTING);
-
+           // Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
             gl.PushMatrix();
-            #region TackastiIzvorSvetlosti
-                    float[] ambijentalnaKomponenta = { 0.7f, 0.2f, 0.3f, 1.0f };
-                    float[] spekularnaKomponenta = { 0.5f, 0.5f, 0.5f, 1 };
-                    float[] difuznaKomponenta = { 0.7f, 0.2f, 0.3f, 1.0f };
- 
-                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT, ambijentalnaKomponenta);
-                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE, difuznaKomponenta);
-                     gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPECULAR, spekularnaKomponenta);
-
-                    float[] smer1 = { -1f, 0.0f, -1.0f };
-                    gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_DIRECTION, smer1);
-
-                    gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPOT_CUTOFF, 180.0f);
-                    // Pozicioniraj svetlosni izvor
-           
-                    float[] pozicija = { 600f, 600.0f, -SceneDistance1 + 200, 1.0f };
-                            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pozicija);
-
-            
-                    gl.PopMatrix();
-                        #endregion
-
-            #region Reflektor
-                             gl.PushMatrix();
-              
-                                float[] difuznaKomponenta2 = { 0.7f, 0.8f, 0.9f, 1.0f };
-                                float[] smer = { 0.0f, 0.0f, -1.0f };
-                                float[] light0specular = new float[] { 0.5f, 0.6f, 0.8f, 1.0f };
-
-            
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPECULAR, light0specular);
-                                // Pridruži komponente svetlosnom izvoru 1
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_AMBIENT,
-                                 AmbijentalnaKomponenta2);
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_DIFFUSE,
-                                difuznaKomponenta2);
-                                // Podesi parametre reflektorkskog izvora
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_DIRECTION, smer);
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_CUTOFF, 35.0f);
-                                // Ukljuci svetlosni izvor
-           
-                                gl.Rotate(-45, 1, 0, 0);
-         
-                                // Pozicioniraj svetlosni izvor
-                                float[] pozicija2 = { XSvetlo, YSvetlo, ZSvetlo, 1.0f };
-                                gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_POSITION, pozicija2);
-
-                     gl.PopMatrix();
-
-                    #region DnevnoSvetlo
-                    gl.PushMatrix();
-
-                        float[] difuznaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
-                        float[] smer3 = { 0.0f, 0.0f, -1.0f };
-                        float[] light0specular3 = new float[] { 0.5f,0.5f,0.5f,1};
-                        float[] ambijentalnaKomponenta3 = { 1f, 0.3f, 0.4f, 1.0f };
-
-                    gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPECULAR, light0specular3);
-                        // Pridruži komponente svetlosnom izvoru 1
-                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_AMBIENT,
-                         ambijentalnaKomponenta3);
-                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_DIFFUSE,
-                        difuznaKomponenta3);
-                        // Podesi parametre reflektorkskog izvora
-                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_DIRECTION, smer3);
-                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_SPOT_CUTOFF, 180);
-                        // Ukljuci svetlosni izvor
-
-                        gl.Rotate(45, 1, 0, 0);
-           
-                        float[] pozicija3 = { 0, 600, -SceneDistance1-300, 1.0f };
-                        gl.Light(OpenGL.GL_LIGHT2, OpenGL.GL_POSITION, pozicija3);
-
-                    gl.PopMatrix();
-
-                    #endregion
-
-
-                    if (UkljucenoTackasto)
-                        gl.Enable(OpenGL.GL_LIGHT0);
-                    else
-                        gl.Disable(OpenGL.GL_LIGHT0);
-
-                    if (UkljucenoReflektor)
-                        gl.Enable(OpenGL.GL_LIGHT1);
-                    else
-                        gl.Disable(OpenGL.GL_LIGHT1);
-
-                    if (DnevnoSvetlo)
-                        gl.Enable(OpenGL.GL_LIGHT2);
-                    else
-                        gl.Disable(OpenGL.GL_LIGHT2);
-                    #endregion
-
-
-
+            gl.Viewport(0, 0, m_width, m_height);
+            //Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
             #endregion
 
             #region Podloga
@@ -491,13 +494,13 @@ namespace AssimpSample
 
                 gl.Begin(OpenGL.GL_QUADS);
                             gl.TexCoord(0.0f, 0.0f);
-                            gl.Vertex4f(400f, -100f, SceneDistance1, 1);
+                            gl.Vertex4f(400f, -100f,  500, 1);
                             gl.TexCoord(1.0f, 0.0f);
-                            gl.Vertex4f(400f, -100f, -SceneDistance1-400, 1);
+                            gl.Vertex4f(400f, -100f, -900, 1);
                             gl.TexCoord(1.0f, 1.0f);
-                            gl.Vertex4f(-400f, -100f, -SceneDistance1-400, 1);
+                            gl.Vertex4f(-400f, -100f, -900, 1);
                             gl.TexCoord(0.0f, 1.0f);
-                            gl.Vertex4f(-400f, -100f, SceneDistance1, 1);
+                            gl.Vertex4f(-400f, -100f, 500, 1);
                         gl.End();
             
                     gl.PopMatrix();
@@ -514,18 +517,24 @@ namespace AssimpSample
             gl.TexEnv(OpenGL.GL_TEXTURE_ENV, OpenGL.GL_TEXTURE_ENV_MODE, OpenGL.GL_ADD);
 
 
-                        gl.Translate(-150, 105.0f, -SceneDistance1 - 100);
+                        gl.Translate(-155, 105.0f, 0);
                         gl.Rotate(90f, 90f, 0f);
 
 
             Cylinder cylinder = new Cylinder();
             cylinder.BaseRadius = 7;
                         cylinder.TopRadius = 7;
-                        cylinder.Height = 300;
+                        cylinder.Height = 310;
             //NE RADI OVO
             //gl.QuadricNormals(cylinder, OpenGL.GLU_SMOOTH);
             cylinder.TextureCoords = true;
-                cylinder.CreateInContext(gl);
+            /*float[] zPlane = { 0.0f, 0.0f, 1.0f, 1.0f };
+            float[] xPlane = { 1.0f, 0.0f, 0.0f, 1.0f };
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder.CreateInContext(gl);
 
                         cylinder.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
 
@@ -535,7 +544,7 @@ namespace AssimpSample
                 //LEVA STATIVA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -100.0f, -SceneDistance1-100);
+                        gl.Translate(-150f, -100.0f,0);
                         gl.Rotate(-90f, 0f, 0f);
      
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder2 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder2" };
@@ -543,7 +552,11 @@ namespace AssimpSample
                         cylinder2.TopRadius = 7;
                         cylinder2.Height = 210;
                 cylinder2.TextureCoords = true;
-                cylinder2.CreateInContext(gl);
+          /*  gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder2.CreateInContext(gl);
                         cylinder2.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
              
                     gl.PopMatrix();
@@ -551,7 +564,7 @@ namespace AssimpSample
                 //DESNA STATIVA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                         gl.Translate(150f, -100.0f, -SceneDistance1 - 100);
+                         gl.Translate(150f, -100.0f, 0);
                          gl.Rotate(-90f, 0f, 0f);
            
                          SharpGL.SceneGraph.Quadrics.Cylinder cylinder3 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder3" };
@@ -559,7 +572,11 @@ namespace AssimpSample
                          cylinder3.TopRadius = 7;
                          cylinder3.Height = 210;
                 cylinder3.TextureCoords = true;
-                cylinder3.CreateInContext(gl);
+        /*    gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder3.CreateInContext(gl);
                          cylinder3.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
                   
                     gl.PopMatrix();
@@ -567,15 +584,19 @@ namespace AssimpSample
                 //DESNA STATIVA IZA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(150f, -100.0f, -SceneDistance1 - 300);
-                        gl.Rotate(-45f, 0f, 0f);
+                        gl.Translate(150f, -100.0f, 200);
+                        gl.Rotate(-135f, 0f, 0f);
      
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder4 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder4" };
                         cylinder4.BaseRadius = 7;
                         cylinder4.TopRadius = 7;
                         cylinder4.Height = 285;
                 cylinder4.TextureCoords = true;
-                cylinder4.CreateInContext(gl);
+         /*   gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder4.CreateInContext(gl);
                         cylinder4.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render); 
 
                     gl.PopMatrix();
@@ -583,15 +604,19 @@ namespace AssimpSample
                 //LEVA STATIVA IZA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -100.0f, -SceneDistance1 - 300);
-                        gl.Rotate(-45f, 0f, 0f);
+                        gl.Translate(-150f, -100.0f,200);
+                        gl.Rotate(-135f, 0f, 0f);
           
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder5 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder5" };
                         cylinder5.BaseRadius = 7;
                         cylinder5.TopRadius = 7;
                         cylinder5.Height = 285;
                 cylinder5.TextureCoords = true;
-                cylinder5.CreateInContext(gl);
+          /*  gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder5.CreateInContext(gl);
                         cylinder5.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
                    
                     gl.PopMatrix();
@@ -599,7 +624,7 @@ namespace AssimpSample
                 //DOLE
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150, -95f, -SceneDistance1 - 290);
+                        gl.Translate(-150, -95f,195);
                         gl.Rotate(90f, 90f, 0f);
 
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder6 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder6" };
@@ -607,7 +632,11 @@ namespace AssimpSample
                         cylinder6.TopRadius = 7;
                         cylinder6.Height = 300;
                 cylinder6.TextureCoords = true;
-                cylinder6.CreateInContext(gl);
+       /*     gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder6.CreateInContext(gl);
                         cylinder6.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
   
                     gl.PopMatrix();
@@ -615,7 +644,7 @@ namespace AssimpSample
                 //DONJA DESNA STRANA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(150f, -95.0f, -SceneDistance1 - 290);
+                        gl.Translate(150f, -95.0f, 0);
                         gl.Rotate(180f, 180f, 0f);
 
                         SharpGL.SceneGraph.Quadrics.Cylinder cylinder7 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder7" };
@@ -623,7 +652,11 @@ namespace AssimpSample
                         cylinder7.TopRadius = 7;
                         cylinder7.Height = 190;
                 cylinder7.TextureCoords = true;
-                cylinder7.CreateInContext(gl);
+         /*   gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder7.CreateInContext(gl);
                         cylinder7.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
                    
                     gl.PopMatrix();
@@ -631,7 +664,7 @@ namespace AssimpSample
                 //DONJA LEVA STRANA
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Plastic]);
                 gl.PushMatrix();
-                        gl.Translate(-150f, -95.0f, -SceneDistance1 - 290);
+                        gl.Translate(-150f, -95.0f,0);
                         gl.Rotate(180f, 180f, 0f);
            
             SharpGL.SceneGraph.Quadrics.Cylinder cylinder8 = new SharpGL.SceneGraph.Quadrics.Cylinder() { Name = "Cylinder8" };
@@ -639,7 +672,11 @@ namespace AssimpSample
                         cylinder8.TopRadius = 7;
                         cylinder8.Height = 190;
                 cylinder8.TextureCoords = true;
-                cylinder8.CreateInContext(gl);
+       /*     gl.TexGen(OpenGL.GL_S, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_TEXTURE_GEN_MODE, OpenGL.GL_SPHERE_MAP);
+            gl.TexGen(OpenGL.GL_S, OpenGL.GL_OBJECT_PLANE, xPlane);
+            gl.TexGen(OpenGL.GL_T, OpenGL.GL_OBJECT_PLANE, zPlane);*/
+            cylinder8.CreateInContext(gl);
                         cylinder8.Render(gl, SharpGL.SceneGraph.Core.RenderMode.Render);
 
                     gl.PopMatrix();
@@ -650,16 +687,15 @@ namespace AssimpSample
             
             gl.PushMatrix();
 
-
-                Glu.gluLookAt(0f, 0f, -SceneDistance1 - 400, 0f, 0f, -SceneDistance1, 0f, 1f, 0f);
+           
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, m_textures[(int)TextureObjects.Ball]);
                 gl.TexEnv(OpenGL.GL_TEXTURE_ENV, OpenGL.GL_TEXTURE_ENV_MODE, OpenGL.GL_MODULATE);
-
+            gl.PushMatrix();
             if (!JumpStop)
             {
                 if (BallGoingUp)
                 {
-                    BallHeight += 40f;
+                    BallHeight += 20f;
                     Pos[0] = 0;
                     Pos[1] = BallHeight;
                     if (BallHeight >= -30f)
@@ -668,7 +704,7 @@ namespace AssimpSample
 
                 else
                 {
-                    BallHeight -= 40f;
+                    BallHeight -= 20f;
                     Pos[0] = 0;
                     Pos[1] = BallHeight;
                     if (BallHeight == -100f)
@@ -694,16 +730,17 @@ namespace AssimpSample
                 gl.Translate(Pos[0], Pos[1], Pos[2]);
             }
 
-            
 
-
-           
 
                 gl.Scale(velicinaLopte, velicinaLopte, velicinaLopte);
-                m_scene.Draw();
-                
 
+                m_scene.Draw();
+            gl.PopMatrix();  
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_SPOT_DIRECTION, new float[] { 0,-1,0});
+            float[] pozicija2 = { 0,200,  -200, 1.0f };
+            gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_POSITION, pozicija2);
                gl.PopMatrix();
+
     #endregion
                 gl.PopMatrix();
             gl.PopMatrix();
