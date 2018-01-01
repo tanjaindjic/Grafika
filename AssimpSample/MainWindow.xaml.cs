@@ -171,11 +171,11 @@ namespace AssimpSample
                     if (!m_world.JumpStop && m_world.RotationX > -70)
                         m_world.RotationX -= 5.0f;
                     break;
-                case Key.S:
+                case Key.F:
                     if (!m_world.JumpStop)
                         m_world.RotationY -= 5.0f;
                     break;
-                case Key.F:
+                case Key.S:
                     if (!m_world.JumpStop)
                         m_world.RotationY += 5.0f;
                     break;
