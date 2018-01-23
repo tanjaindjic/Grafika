@@ -35,7 +35,7 @@ Definisanje materijala, osvetljenja, tekstura, interakcije i kamere u 3D sceni  
 - Pomoću ugrađenih WPF kontrola, omogućiti sledeće:
 izbor boje ambijentalne komponente reflektorskog svetlosnog izvora,
 izbor faktora (uniformnog) skaliranja lopte, i
-izbor brzine automatske rotacije lopte oko svoje y-ose. (VALJDA RADI)
+izbor brzine automatske rotacije lopte oko svoje y-ose.
 Omogućiti interakciju sa korisnikom preko tastature: sa F4 se izlazi iz aplikacije, tasterima 
 E/D vrši se rotacija za 5 stepeni oko horizontalne ose, tasterima S/F vrši se rotacija za 5 stepeni oko vertikalne ose, a tasterima +/- približavanje i udaljavanje centru scene. Ograničiti rotaciju tako da se nikada ne vidi donja strana podloge. Dodatno ograničiti rotaciju oko horizontalne ose tako da scena nikada ne bude prikazana naopako.
 
